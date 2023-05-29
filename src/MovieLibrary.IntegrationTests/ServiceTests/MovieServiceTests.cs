@@ -36,6 +36,7 @@ namespace MovieLibrary.IntegrationTests.ServiceTests
 
             // Assert
             Assert.Equal(movieFilters.PageSize, result.Count());
+            Assert.Equal(result.Select(x => x.ImdbRating), result.Select(x => x.ImdbRating).OrderByDescending(x => x));
         }
 
         [Fact]
