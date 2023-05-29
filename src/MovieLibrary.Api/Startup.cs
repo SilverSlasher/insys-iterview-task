@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using MovieLibrary.Api.Middlewares;
+using MovieLibrary.Core.Extensions;
 using MovieLibrary.Data;
 
 namespace MovieLibrary.Api
@@ -20,7 +22,7 @@ namespace MovieLibrary.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddEntityFrameworkSqlite().AddDbContext<MovieLibraryContext>();
-
+            services.SetDefaultDependencies();
             services.AddControllers();
             services.AddSwaggerGen(options =>
             {
@@ -41,6 +43,7 @@ namespace MovieLibrary.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseRouting();
 
             app.UseAuthorization();

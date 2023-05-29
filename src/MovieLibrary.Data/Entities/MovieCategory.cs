@@ -1,9 +1,7 @@
 ﻿namespace MovieLibrary.Data.Entities
 {
-    public class MovieCategory
+    public class MovieCategory : DbEntity
     {
-        public int Id { get; set; }
-
         public int MovieId { get; set; }
 
         public int CategoryId { get; set; }
